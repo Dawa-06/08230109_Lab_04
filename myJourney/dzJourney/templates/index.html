@@ -1,0 +1,59 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Learning Journey — Dawa Zam</title>
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+</head>
+<body style="background-color: rgb(189, 171, 186); color: rgb(19, 17, 17);">
+    <header class="site-header">
+        <div class="container">
+            <h1>My Learning Journey</h1>
+            <p class="subtitle">Progress, projects, and milestones from Dawa Zam</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>About My Journey</h2>
+            <p>Welcome — here you'll find highlights of my learning progress, projects I've worked on, and notes about what I've learned.</p>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+                <img src="{% static 'images/6339312012130717155.jpg' %}" alt="Learning Journey" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 32px rgba(0,0,0,0.15);">
+            </div>
+        </section>
+
+        {% if journeys %}
+            <section class="milestones">
+                <h3>Recent Milestones</h3>
+                <ul class="milestone-list">
+                    {% for journey in journeys %}
+                        <li class="milestone">
+                            <h4>{{ journey.title }}</h4>
+                            <p>{{ journey.description }}</p>
+                            <small class="date">Added: {{ journey.date|date:"F d, Y" }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% else %}
+            <section class="empty-state">
+                <p><em>No milestones yet. Add entries in the admin to populate this page.</em></p>
+            </section>
+        {% endif %}
+
+        <nav class="actions">
+            <a href="{% url 'aboutMe' %}" class="btn">About Me — Dawa Zam →</a>
+            
+        </nav>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Created by Dawa Zam | © 2025 My Learning Journey</p>
+        </div>
+    </footer>
+</body>
+</html>

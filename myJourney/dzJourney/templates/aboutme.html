@@ -1,0 +1,55 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>About Me - Dawa Zam</title>
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>👋 About Me — Dawa Zam</h1>
+            <p>Learn more about my background, interests, and contact details.</p>
+        </header>
+
+        <div class="profile-section">
+            {% if abouts %}
+                {% for about in abouts %}
+                    <div class="info-item">
+                        <span class="info-label">Name:</span>
+                        <p>{{ about.name }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Bio:</span>
+                        <p>{{ about.bio }}</p>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        <p><a href="mailto:{{ about.email }}">{{ about.email }}</a></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="info-item no-data">
+                    <p><em>No profile information available. Add details through the admin panel.</em></p>
+                </div>
+            {% endif %}
+        </div>
+
+        <nav class="actions">
+            <a href="{% url 'Index' %}" class="back-button">← Back to My Learning Journey</a>
+            {% if user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="edit-button">Edit Profile</a>
+            {% endif %}
+        </nav>
+
+        <footer class="footer">
+            <p>Created by Dawa Zam | © 2025 My Learning Journey</p>
+        </footer>
+    </div>
+</body>
+</html>
